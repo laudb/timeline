@@ -9,15 +9,12 @@ class Article < ActiveRecord::Base
     url = 'http://feeds.theguardian.com/theguardian/football/rss'
     rss = SimpleRSS.parse open(url)
 
-  #iterate through feed save title into variable 
+  #iterate through feed. Save title, link, description into variable 
     rss.items.each do |r|
 
-      t = r.title
-      t.force_encoding("UTF-8")
-      l =r.link
-      l.force_encoding("UTF-8")
-      d = r.description
-      d.force_encoding("UTF-8")
+      t = r.title.force_encoding("UTF-8")
+      l = r.link.force_encoding("UTF-8")
+      d = r.description.force_encoding("UTF-8")
 
       @article = Article.create(title: t, link: l, description: d)
   
